@@ -4,19 +4,22 @@
   Static page, no API key. It's the front door students open.
 
   TO SET UP:
-   1. Paste your coach's URL into COACH_URL below.
-   2. Each lesson quiz is a copy of the CAT delivery template, saved at the
+   1. Each lesson quiz is a copy of the CAT delivery template, saved at the
       path in its "file" field (e.g. unit1/lesson1.html).
-   3. Set ready:true on a lesson once its quiz page exists; ready:false shows
+   2. Set ready:true on a lesson once its quiz page exists; ready:false shows
       "coming soon" and won't link to a dead page.
+   3. The end-of-unit performance task is assigned separately as a direct link
+      (e.g. in Google Classroom), so you control timing. The card on this hub is
+      just a signpost telling students the unit ends with the PT — it doesn't
+      link anywhere, so there's nothing to toggle.
 
   Folder layout this expects:
      alg2/
      ├─ index.html        (this file)
      └─ unit1/
-        ├─ lesson1.html   (CAT delivery template + lesson 1.1 items)
-        ├─ lesson2.html
-        └─ ... lesson8.html
+        ├─ lesson1.html … lesson8.html   (each lesson page)
+        ├─ check1.html  … check8.html    (the lesson quizzes)
+        └─ pt.html                       (end-of-unit performance task)
 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,8 +29,6 @@
 
 <script>
   /* ========================= SET THESE ========================= */
-  const COACH_URL = "https://pt-coach.netlify.app/";   // ← paste your coach URL
-
   const UNIT = {
     number: 1,
     title: "Functions, Equations & Transformations",
@@ -76,18 +77,12 @@
   .lesson.soon .arrow{display:none}
   .soonbadge{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--line-2);border-radius:6px;padding:3px 7px}
 
-  .pt{background:var(--gold-soft);border:1px solid #e3d2a6;border-radius:14px;padding:18px 20px;margin-bottom:10px}
-  .pt .ttl{font-family:"Fraunces",serif;font-weight:900;font-size:20px;margin:0 0 4px}
-  .pt .meta{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
-  .pt p{margin:0;font-size:15.5px;color:var(--ink)}
-
-  a.coach{display:flex;align-items:center;justify-content:space-between;gap:14px;text-decoration:none;color:#fff;
-    background:var(--blue);border-radius:14px;padding:18px 22px;margin-top:6px;box-shadow:0 16px 32px -22px var(--blue-deep);
-    transition:filter .15s,transform .12s}
-  a.coach:hover{filter:brightness(1.07);transform:translateY(-2px)}
-  a.coach .ct{font-family:"Fraunces",serif;font-weight:900;font-size:21px}
-  a.coach .cs{font-size:14px;opacity:.9;margin-top:2px}
-  a.coach .cgo{font-family:"JetBrains Mono",monospace;font-size:13px;border:1px solid rgba(255,255,255,.5);border-radius:9px;padding:9px 14px;white-space:nowrap}
+  /* PT card — informational signpost (the PT is assigned separately as a link) */
+  .ptcard{background:var(--gold-soft);border:1px solid #e3d2a6;border-radius:14px;padding:18px 20px}
+  .ptcard .meta{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .ptcard .ttl{font-family:"Fraunces",serif;font-weight:900;font-size:20px;margin:0 0 4px}
+  .ptcard p{margin:0;font-size:15.5px;color:var(--ink)}
+  .ptbadge{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--line-2);border-radius:6px;padding:3px 7px}
 
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:14px;font-size:13.5px;color:var(--ink-soft);font-style:italic}
 </style>
@@ -97,23 +92,14 @@
     <p class="kicker" id="kick"></p>
     <h1 id="title"></h1>
     <span class="std" id="std"></span>
-    <p class="intro">Work through the lesson checks as we go — each one gives you instant feedback and a score to send your teacher. At the end of the unit comes the performance task. Stuck on the reasoning? The coach is one tap away.</p>
+    <p class="intro">Work through the lesson checks as we go — each one gives you instant feedback and a score to send your teacher. At the end of the unit comes the performance task, where you put the whole unit together.</p>
   </header>
 
   <div class="seclabel">Lesson checks</div>
   <div id="lessons"></div>
 
   <div class="seclabel">End of unit</div>
-  <div class="pt">
-    <div class="meta">Performance Task · teacher-scored</div>
-    <p class="ttl">Unit 1 Performance Task</p>
-    <p>You'll get this on paper. Read the situation, make a plan, show your work, and explain your reasoning. Use the coach below if you get stuck — it won't give you the answer, but it'll help you find your way to it.</p>
-  </div>
-
-  <a class="coach" id="coach" target="_blank" rel="noopener">
-    <div><div class="ct">Open the Coach</div><div class="cs">Get unstuck on a performance task — without being handed the answer.</div></div>
-    <span class="cgo">Open →</span>
-  </a>
+  <div id="ptcard"></div>
 
   <footer id="foot"></footer>
 </div></div>
@@ -123,7 +109,14 @@
   $("kick").textContent=`Algebra 2 · Unit ${UNIT.number}`;
   $("title").textContent=UNIT.title;
   $("std").textContent=UNIT.standards;
-  $("coach").href=COACH_URL;
+
+  // End-of-unit PT card: an informational signpost. The PT is assigned separately
+  // as a direct link (e.g. in Google Classroom), so this card doesn't link anywhere.
+  $("ptcard").innerHTML=`<div class="ptcard">
+    <div class="meta">Performance Task · teacher-scored <span class="ptbadge">Completes the unit</span></div>
+    <div class="ttl">Unit ${UNIT.number} Performance Task</div>
+    <p>The capstone that finishes Unit ${UNIT.number}. Your teacher will assign it when the unit wraps up — you'll show your work on a paper copy, with the Coach there to help you think it through.</p>
+  </div>`;
 
   const box=$("lessons");
   UNIT.lessons.forEach(L=>{
