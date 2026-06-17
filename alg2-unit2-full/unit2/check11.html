@@ -27,36 +27,27 @@
 <script>
   /* ============================ PASTE LESSON ITEMS HERE ============================ */
   const QUIZ = {
-    lesson: "F-IF.6 — Average Rate of Change",
-    items: [
-      { type:"multiple_choice", claim:"1", dok:"1",
-        stem:"A function passes through (1, 3) and (5, 11). What is its average rate of change over the interval [1, 5]?",
-        options:["A) 2","B) 8","C) 4","D) 1/2"], answer:"A",
-        rationale:"(11 − 3)/(5 − 1) = 8/4 = 2. Choice B forgets to divide by the change in x; D inverts the ratio." },
-      { type:"multiple_choice", claim:"1", dok:"2",
-        stem:"For f(x) = x², which interval has the GREATER average rate of change?",
-        options:["A) [0, 2]","B) [2, 4]","C) They are equal","D) Cannot be determined"], answer:"B",
-        rationale:"[0,2]: (4−0)/2 = 2.  [2,4]: (16−4)/2 = 6. The parabola steepens, so the rate grows. C assumes a constant rate, which only holds for linear functions." },
-      { type:"multiple_select", claim:"1", dok:"2",
-        stem:"Select ALL statements that are true about average rate of change.",
-        options:["A) It equals the slope of the secant line","B) It is constant for every function","C) For a linear function it equals the slope","D) It can be negative"],
-        answer:"A, C, D",
-        rationale:"B is false — only linear functions have a constant rate of change. A, C, and D are all true." },
-      { type:"numeric", claim:"1", dok:"1",
-        stem:"For f(x) = x², find the average rate of change on [2, 4]. Enter a number.",
-        answer:"6",
-        rationale:"(f(4) − f(2))/(4 − 2) = (16 − 4)/2 = 6." },
-      { type:"expression", claim:"1", dok:"2",
-        stem:"Write the formula for the average rate of change of f on the interval [a, b].",
-        answer:"(f(b) − f(a)) / (b − a)",
-        rationale:"Change in output over change in input, between the two endpoints." },
-      { type:"short_cr", claim:"3", dok:"2",
-        stem:"In 1–2 sentences, explain what the average rate of change represents on the graph of a function.",
-        answer:"It is the slope of the secant line connecting the two endpoints of the interval — how fast the output changes per unit of input, on average, across that stretch.",
-        rationale:"Look for: the secant-line / slope idea, and 'average' change across the interval." }
+    lesson:"2.9 — Complex Solutions of Quadratics",
+    items:[
+      {type:"multiple_choice", claim:"1", dok:"1", stem:"If a quadratic's discriminant is −12, how many REAL solutions does it have?",
+        options:["A) None","B) One","C) Two","D) Three"], answer:"A",
+        rationale:"Negative discriminant → no real solutions (two complex ones instead)."},
+      {type:"expression", claim:"1", dok:"1", stem:"Simplify √(−64).", answer:"8i", rationale:"√64 · √(−1) = 8i."},
+      {type:"expression", claim:"1", dok:"2", stem:"Solve x² + 16 = 0. Write both solutions.", answer:"x = 4i or x = −4i",
+        rationale:"x² = −16 → x = ±4i."},
+      {type:"expression", claim:"1", dok:"2", stem:"Solve x² − 4x + 13 = 0. Write both solutions.", answer:"x = 2 + 3i or x = 2 − 3i",
+        rationale:"Discriminant 16 − 52 = −36; x = (4 ± 6i)/2 = 2 ± 3i."},
+      {type:"multiple_select", claim:"1", dok:"2", stem:"A quadratic equation has the solution 5 − 2i. Select ALL that must be true.",
+        options:["A) Its other solution is 5 + 2i","B) Its discriminant is negative","C) Its graph does not cross the x-axis","D) It has two real solutions"],
+        answer:"A, B, C", rationale:"Complex solutions come in conjugate pairs (other is 5 + 2i) ✓, mean a negative discriminant ✓, and a graph that misses the x-axis ✓. D is false."},
+      {type:"expression", claim:"1", dok:"2", stem:"Solve x² + 6x + 10 = 0. Write both solutions.", answer:"x = −3 + i or x = −3 − i",
+        rationale:"Discriminant 36 − 40 = −4; x = (−6 ± 2i)/2 = −3 ± i."},
+      {type:"short_cr", claim:"3", dok:"2", stem:"Explain the connection between a quadratic's discriminant, its number of real solutions, and how its graph relates to the x-axis.",
+        answer:"Positive discriminant → two real solutions and the graph crosses the x-axis twice; zero → one real solution and the graph touches the x-axis once; negative → no real solutions (two complex) and the graph never touches the x-axis.",
+        rationale:"Look for: all three cases linking discriminant sign → number of real solutions → x-axis crossings."}
     ]
   };
-  /* ================================================================================ */
+    /* ================================================================================ */
 </script>
 
 <style>

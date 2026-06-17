@@ -27,36 +27,40 @@
 <script>
   /* ============================ PASTE LESSON ITEMS HERE ============================ */
   const QUIZ = {
-    lesson: "F-IF.6 — Average Rate of Change",
+    lesson: "2.6b — Completing the Square: Harder Cases & the Vertex",
     items: [
       { type:"multiple_choice", claim:"1", dok:"1",
-        stem:"A function passes through (1, 3) and (5, 11). What is its average rate of change over the interval [1, 5]?",
-        options:["A) 2","B) 8","C) 4","D) 1/2"], answer:"A",
-        rationale:"(11 − 3)/(5 − 1) = 8/4 = 2. Choice B forgets to divide by the change in x; D inverts the ratio." },
-      { type:"multiple_choice", claim:"1", dok:"2",
-        stem:"For f(x) = x², which interval has the GREATER average rate of change?",
-        options:["A) [0, 2]","B) [2, 4]","C) They are equal","D) Cannot be determined"], answer:"B",
-        rationale:"[0,2]: (4−0)/2 = 2.  [2,4]: (16−4)/2 = 6. The parabola steepens, so the rate grows. C assumes a constant rate, which only holds for linear functions." },
+        stem:"To solve 2x² + 16x + 6 = 0 by completing the square, what is the best FIRST step?",
+        options:["A) Divide every term by 2","B) Add 16 to both sides","C) Subtract 6, then add 64","D) Factor out 16"], answer:"A",
+        rationale:"When the leading number isn't 1, divide every term by it first so x² stands alone." },
+      { type:"multiple_choice", claim:"1", dok:"1",
+        stem:"What is the vertex of y = (x + 3)² − 7?",
+        options:["A) (−3, −7)","B) (3, −7)","C) (−3, 7)","D) (3, 7)"], answer:"A",
+        rationale:"y = (x − h)² + k has vertex (h, k). (x + 3) means h = −3; k = −7. Vertex (−3, −7)." },
+      { type:"numeric", claim:"1", dok:"2",
+        stem:"Write y = x² + 6x + 10 in vertex form y = (x + 3)² + k. What is k?",
+        answer:"1",
+        rationale:"Add/subtract (6/2)² = 9: y = (x² + 6x + 9) + 10 − 9 = (x + 3)² + 1, so k = 1." },
+      { type:"numeric", claim:"1", dok:"2",
+        stem:"The parabola y = x² − 10x + 21 opens up. What is the y-value of its lowest point?",
+        answer:"−4",
+        rationale:"Complete the square: y = (x − 5)² + 21 − 25 = (x − 5)² − 4. Vertex (5, −4); the lowest y is −4." },
       { type:"multiple_select", claim:"1", dok:"2",
-        stem:"Select ALL statements that are true about average rate of change.",
-        options:["A) It equals the slope of the secant line","B) It is constant for every function","C) For a linear function it equals the slope","D) It can be negative"],
-        answer:"A, C, D",
-        rationale:"B is false — only linear functions have a constant rate of change. A, C, and D are all true." },
-      { type:"numeric", claim:"1", dok:"1",
-        stem:"For f(x) = x², find the average rate of change on [2, 4]. Enter a number.",
-        answer:"6",
-        rationale:"(f(4) − f(2))/(4 − 2) = (16 − 4)/2 = 6." },
+        stem:"Select ALL true statements about y = 2(x − 1)² + 5.",
+        options:["A) The vertex is (1, 5)","B) It opens upward","C) It has a maximum at y = 5","D) Its minimum value is 5"],
+        answer:"A, B, D",
+        rationale:"Vertex (1, 5) ✓. a = 2 > 0 opens up ✓, so the vertex is a MINIMUM — C is false — and the minimum value is 5 ✓." },
       { type:"expression", claim:"1", dok:"2",
-        stem:"Write the formula for the average rate of change of f on the interval [a, b].",
-        answer:"(f(b) − f(a)) / (b − a)",
-        rationale:"Change in output over change in input, between the two endpoints." },
+        stem:"Solve x² + 7x + 12 = 0 by completing the square. Write both solutions.",
+        answer:"x = −3 or x = −4",
+        rationale:"Half of 7 is 7/2; (7/2)² = 49/4. (x + 7/2)² = −12 + 49/4 = 1/4 → x = −7/2 ± 1/2 → −3 or −4." },
       { type:"short_cr", claim:"3", dok:"2",
-        stem:"In 1–2 sentences, explain what the average rate of change represents on the graph of a function.",
-        answer:"It is the slope of the secant line connecting the two endpoints of the interval — how fast the output changes per unit of input, on average, across that stretch.",
-        rationale:"Look for: the secant-line / slope idea, and 'average' change across the interval." }
+        stem:"Vertex form y = a(x − h)² + k tells you the parabola's highest or lowest point at a glance. Explain how you read that point, and how you know whether it is a high point or a low point.",
+        answer:"The vertex is (h, k), so k is the y-value of the turning point. If a is positive the parabola opens up and the vertex is the minimum (low point); if a is negative it opens down and the vertex is the maximum (high point).",
+        rationale:"Look for: reading the vertex (h, k) from the form, and using the sign of a to decide minimum vs maximum." }
     ]
   };
-  /* ================================================================================ */
+    /* ================================================================================ */
 </script>
 
 <style>

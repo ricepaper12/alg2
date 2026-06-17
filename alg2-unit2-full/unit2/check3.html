@@ -27,36 +27,29 @@
 <script>
   /* ============================ PASTE LESSON ITEMS HERE ============================ */
   const QUIZ = {
-    lesson: "F-IF.6 — Average Rate of Change",
-    items: [
-      { type:"multiple_choice", claim:"1", dok:"1",
-        stem:"A function passes through (1, 3) and (5, 11). What is its average rate of change over the interval [1, 5]?",
-        options:["A) 2","B) 8","C) 4","D) 1/2"], answer:"A",
-        rationale:"(11 − 3)/(5 − 1) = 8/4 = 2. Choice B forgets to divide by the change in x; D inverts the ratio." },
-      { type:"multiple_choice", claim:"1", dok:"2",
-        stem:"For f(x) = x², which interval has the GREATER average rate of change?",
-        options:["A) [0, 2]","B) [2, 4]","C) They are equal","D) Cannot be determined"], answer:"B",
-        rationale:"[0,2]: (4−0)/2 = 2.  [2,4]: (16−4)/2 = 6. The parabola steepens, so the rate grows. C assumes a constant rate, which only holds for linear functions." },
-      { type:"multiple_select", claim:"1", dok:"2",
-        stem:"Select ALL statements that are true about average rate of change.",
-        options:["A) It equals the slope of the secant line","B) It is constant for every function","C) For a linear function it equals the slope","D) It can be negative"],
-        answer:"A, C, D",
-        rationale:"B is false — only linear functions have a constant rate of change. A, C, and D are all true." },
-      { type:"numeric", claim:"1", dok:"1",
-        stem:"For f(x) = x², find the average rate of change on [2, 4]. Enter a number.",
-        answer:"6",
-        rationale:"(f(4) − f(2))/(4 − 2) = (16 − 4)/2 = 6." },
-      { type:"expression", claim:"1", dok:"2",
-        stem:"Write the formula for the average rate of change of f on the interval [a, b].",
-        answer:"(f(b) − f(a)) / (b − a)",
-        rationale:"Change in output over change in input, between the two endpoints." },
-      { type:"short_cr", claim:"3", dok:"2",
-        stem:"In 1–2 sentences, explain what the average rate of change represents on the graph of a function.",
-        answer:"It is the slope of the secant line connecting the two endpoints of the interval — how fast the output changes per unit of input, on average, across that stretch.",
-        rationale:"Look for: the secant-line / slope idea, and 'average' change across the interval." }
+    lesson:"2.3a — Factoring: GCF, x²+bx+c & Difference of Squares",
+    items:[
+      {type:"multiple_choice", claim:"1", dok:"1", stem:"The GCF of 8x² + 12x is:",
+        options:["A) 4x","B) 2x","C) 4","D) 8x"], answer:"A",
+        rationale:"8 and 12 share 4, and both terms have an x: GCF = 4x."},
+      {type:"expression", claim:"1", dok:"1", stem:"Factor x² + 9x + 20.", answer:"(x + 4)(x + 5)",
+        rationale:"Multiply to 20, add to 9: 4 and 5."},
+      {type:"multiple_choice", claim:"1", dok:"2", stem:"Which one factors as a difference of squares?",
+        options:["A) x² − 16","B) x² + 16","C) x² − 15","D) x² − 8x"], answer:"A",
+        rationale:"x² − 16 = (x + 4)(x − 4). B is a sum; 15 isn't a perfect square; D has no square constant."},
+      {type:"expression", claim:"1", dok:"2", stem:"Factor x² − 7x + 10.", answer:"(x − 2)(x − 5)",
+        rationale:"Multiply to 10, add to −7: −2 and −5."},
+      {type:"multiple_select", claim:"1", dok:"2", stem:"Select ALL that are factored correctly.",
+        options:["A) x² + 5x + 6 = (x+2)(x+3)","B) x² − 9 = (x−3)²","C) x² − 4 = (x+2)(x−2)","D) x² + x − 6 = (x+3)(x−2)"],
+        answer:"A, C, D", rationale:"A, C, D check when multiplied back. B is wrong — x² − 9 = (x+3)(x−3), not (x−3)²."},
+      {type:"expression", claim:"1", dok:"2", stem:"Factor completely (GCF first): 2x² + 10x + 12.",
+        answer:"2(x + 2)(x + 3)", rationale:"GCF 2: 2(x² + 5x + 6) = 2(x + 2)(x + 3)."},
+      {type:"short_cr", claim:"3", dok:"2", stem:"Why should you always check for a GCF before trying to factor a trinomial?",
+        answer:"Pulling out the GCF first makes the remaining numbers smaller and easier to work with, and it's the only way to factor completely — skipping it leaves a common factor hidden inside.",
+        rationale:"Look for: GCF first makes it simpler and ensures complete factoring."}
     ]
   };
-  /* ================================================================================ */
+    /* ================================================================================ */
 </script>
 
 <style>

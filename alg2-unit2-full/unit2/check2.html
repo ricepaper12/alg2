@@ -27,36 +27,30 @@
 <script>
   /* ============================ PASTE LESSON ITEMS HERE ============================ */
   const QUIZ = {
-    lesson: "F-IF.6 — Average Rate of Change",
-    items: [
-      { type:"multiple_choice", claim:"1", dok:"1",
-        stem:"A function passes through (1, 3) and (5, 11). What is its average rate of change over the interval [1, 5]?",
-        options:["A) 2","B) 8","C) 4","D) 1/2"], answer:"A",
-        rationale:"(11 − 3)/(5 − 1) = 8/4 = 2. Choice B forgets to divide by the change in x; D inverts the ratio." },
-      { type:"multiple_choice", claim:"1", dok:"2",
-        stem:"For f(x) = x², which interval has the GREATER average rate of change?",
-        options:["A) [0, 2]","B) [2, 4]","C) They are equal","D) Cannot be determined"], answer:"B",
-        rationale:"[0,2]: (4−0)/2 = 2.  [2,4]: (16−4)/2 = 6. The parabola steepens, so the rate grows. C assumes a constant rate, which only holds for linear functions." },
-      { type:"multiple_select", claim:"1", dok:"2",
-        stem:"Select ALL statements that are true about average rate of change.",
-        options:["A) It equals the slope of the secant line","B) It is constant for every function","C) For a linear function it equals the slope","D) It can be negative"],
-        answer:"A, C, D",
-        rationale:"B is false — only linear functions have a constant rate of change. A, C, and D are all true." },
-      { type:"numeric", claim:"1", dok:"1",
-        stem:"For f(x) = x², find the average rate of change on [2, 4]. Enter a number.",
-        answer:"6",
-        rationale:"(f(4) − f(2))/(4 − 2) = (16 − 4)/2 = 6." },
-      { type:"expression", claim:"1", dok:"2",
-        stem:"Write the formula for the average rate of change of f on the interval [a, b].",
-        answer:"(f(b) − f(a)) / (b − a)",
-        rationale:"Change in output over change in input, between the two endpoints." },
-      { type:"short_cr", claim:"3", dok:"2",
-        stem:"In 1–2 sentences, explain what the average rate of change represents on the graph of a function.",
-        answer:"It is the slope of the secant line connecting the two endpoints of the interval — how fast the output changes per unit of input, on average, across that stretch.",
-        rationale:"Look for: the secant-line / slope idea, and 'average' change across the interval." }
+    lesson:"2.2 — Vertex Form & Transformations",
+    items:[
+      {type:"multiple_choice", claim:"1", dok:"1", stem:"The vertex of y = (x + 7)² − 2 is:",
+        options:["A) (−7, −2)","B) (7, −2)","C) (−7, 2)","D) (7, 2)"], answer:"A",
+        rationale:"(x + 7) → h = −7; k = −2."},
+      {type:"multiple_choice", claim:"1", dok:"1", stem:"Which equation has its vertex at (5, −3)?",
+        options:["A) y = (x − 5)² − 3","B) y = (x + 5)² − 3","C) y = (x − 5)² + 3","D) y = (x − 3)² − 5"], answer:"A",
+        rationale:"Vertex (h, k) = (5, −3) → (x − 5)² − 3."},
+      {type:"multiple_choice", claim:"1", dok:"2", stem:"Compared to y = x², how is y = −2(x − 1)² + 4 changed?",
+        options:["A) Flipped down, narrower, right 1, up 4","B) Flipped down, wider, left 1, up 4","C) Opens up, narrower, right 1, down 4","D) Flipped down, narrower, left 1, up 4"],
+        answer:"A", rationale:"a = −2 flips it down and narrows it; h = 1 → right 1; k = 4 → up 4."},
+      {type:"numeric", claim:"1", dok:"2", stem:"y = (x − 2)² + 5 has vertex (2, 5). What is the minimum y-value of this function?",
+        answer:"5", rationale:"Opens up (a = 1 > 0), so the vertex y-value 5 is the minimum."},
+      {type:"multiple_select", claim:"1", dok:"2", stem:"Select ALL true statements about y = (x + 4)² − 1.",
+        options:["A) Vertex (−4, −1)","B) Opens up","C) Minimum value −1","D) Shifted right 4 from the parent"],
+        answer:"A, B, C", rationale:"Vertex (−4, −1) ✓; opens up ✓; minimum value −1 ✓. (x + 4) shifts LEFT 4, so D is false."},
+      {type:"expression", claim:"1", dok:"2", stem:"Write the vertex-form equation of a parabola with vertex (0, −6) that opens up (a = 1).",
+        answer:"y = x² − 6", rationale:"Vertex (0, −6): (x − 0)² − 6 = x² − 6."},
+      {type:"short_cr", claim:"3", dok:"2", stem:"Two parabolas have the same shape, but one has vertex (0, 0) and the other (3, −5). Describe the transformation that moves the first onto the second.",
+        answer:"Shift it right 3 and down 5 — the vertex moves from (0,0) to (3,−5), so h = 3 (right 3) and k = −5 (down 5), giving y = (x − 3)² − 5.",
+        rationale:"Look for: right 3 and down 5, matching h = 3 and k = −5."}
     ]
   };
-  /* ================================================================================ */
+    /* ================================================================================ */
 </script>
 
 <style>
