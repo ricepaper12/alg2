@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<!--
+  ===========================================================================
+  Algebra 2 — Teacher Console   (deploys to your repo ROOT as teacher.html)
+  Bookmark this page. It is NOT linked from the student master schedule.
+
+  HONEST NOTE ON THE CODE BELOW: the passcode is a speed bump that keeps
+  students from casually wandering in. It is NOT security — this page is
+  public and anyone who views source can read it. The only real lock in this
+  whole setup is Google itself: your gradebook Sheet is private to your
+  account, so its link is safe to keep here even though the page is public.
+
+  TO SET UP: edit the CONSOLE config block below — set your passcode, your
+  designer URL, your gradebook Sheet + Form links, and fill in each unit's
+  PT links as you build them. Nothing else needs editing.
+  ===========================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Algebra 2 · Teacher Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,900&family=Newsreader:wght@400;500&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#f6f3ec;--paper-2:#fffdf9;--ink:#23262b;--ink-soft:#5e6470;--line:#e3ddd0;--line-2:#d4ccbb;
+    --blue:#2f6f8f;--blue-deep:#22536b;--blue-soft:#e2eef2;--gold:#b88a1f;--gold-soft:#f6edd6;--clay:#c2533c;--clay-soft:#f3ddd6;}
+  *{box-sizing:border-box} body{margin:0}
+  .wrap{font-family:"Newsreader",Georgia,serif;color:var(--ink);line-height:1.6;
+    background:radial-gradient(900px 460px at 90% -12%,#f0e4dd 0,transparent 60%),var(--paper);min-height:100vh;
+    padding:34px clamp(14px,4vw,40px) 60px}
+  .shell{max-width:760px;margin:0 auto}
+  .kicker{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--clay);margin:0 0 8px;font-weight:600}
+  h1{font-family:"Fraunces",serif;font-weight:900;font-size:clamp(28px,5vw,44px);line-height:1.03;margin:0 0 10px;letter-spacing:-.01em}
+  .intro{color:var(--ink-soft);font-size:16px;margin:14px 0 0;max-width:62ch}
+
+  /* gate */
+  #gate{max-width:420px;margin:14vh auto 0;text-align:center}
+  #gate .lockttl{font-family:"Fraunces",serif;font-weight:900;font-size:30px;margin:18px 0 6px}
+  #gate .locksub{color:var(--ink-soft);font-size:14.5px;margin:0 0 22px}
+  #gate input{width:100%;font-family:"JetBrains Mono",monospace;font-size:16px;padding:13px 15px;border:1px solid var(--line-2);border-radius:11px;background:var(--paper-2);text-align:center}
+  #gate input:focus{outline:none;border-color:var(--clay)}
+  #gate button{margin-top:12px;width:100%;font-family:"JetBrains Mono",monospace;font-weight:600;font-size:14px;letter-spacing:.04em;
+    background:var(--clay);color:#fff;border:none;border-radius:11px;padding:13px;cursor:pointer}
+  #gate button:hover{background:#a8442f}
+  #err{color:var(--clay);font-family:"JetBrains Mono",monospace;font-size:12.5px;min-height:18px;margin-top:10px}
+
+  #console{display:none}
+  .seclabel{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin:30px 0 12px}
+
+  a.row,div.row{display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit;background:var(--paper-2);
+    border:1px solid var(--line);border-radius:13px;padding:15px 18px;margin-bottom:10px;
+    box-shadow:0 12px 26px -24px #23262b50;transition:transform .12s,border-color .12s,box-shadow .12s}
+  a.row:hover{transform:translateY(-2px);border-color:var(--clay);box-shadow:0 16px 30px -22px #23262b66}
+  .row .ic{font-family:"Fraunces",serif;font-weight:900;font-size:20px;color:var(--clay);flex-shrink:0;width:40px;text-align:center}
+  .row .body{flex:1;min-width:0}
+  .row .t{font-size:17px;font-weight:500}
+  .row .s{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--ink-soft);margin-top:2px}
+  .row .links{display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
+  .row .go{font-family:"JetBrains Mono",monospace;font-size:11.5px;font-weight:600;color:var(--blue-deep);background:var(--blue-soft);border-radius:7px;padding:6px 10px;text-decoration:none;white-space:nowrap}
+  .row .go:hover{background:#d3e6ec}
+  .row.muted{opacity:.55;background:var(--paper);pointer-events:none}
+  .row .none{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--line-2);border-radius:6px;padding:3px 8px}
+
+  .note{background:var(--gold-soft);border:1px solid #e3d2a6;border-radius:12px;padding:14px 16px;font-size:14.5px;color:var(--ink);margin-top:8px}
+  .note b{font-weight:600}
+  footer{margin-top:34px;border-top:1px solid var(--line);padding-top:14px;font-size:13px;color:var(--ink-soft);font-style:italic}
+</style>
+</head>
+<body><div class="wrap"><div class="shell">
+
+  <!-- ========================= SET THESE ========================= -->
+  <script>
+  const CONSOLE = {
+    passcode: "alg2-teacher",                                   // ← change this. Speed bump only, NOT security.
+    designerUrl: "https://YOUR-pt-designer-site.netlify.app",   // ← your CAT & PT Designer URL
+    gradebook: {
+      sheetUrl: "",   // ← your gradebook Google Sheet (private to your Google account = the real lock)
+      formUrl:  ""    // ← the response Form (reference)
+    },
+    units: [
+      { n:"1", title:"Functions, Equations & Transformations", launch:"unit1/pt.html", paper:"" },
+      { n:"2", title:"Quadratic Functions & Complex Numbers",  launch:"",              paper:"" },
+      { n:"3", title:"Polynomial Functions",                   launch:"",              paper:"" },
+      { n:"4", title:"Rational Expressions & Functions",       launch:"",              paper:"" },
+      { n:"5", title:"Radical Functions & Rational Exponents", launch:"",              paper:"" },
+      { n:"6", title:"Exponential & Logarithmic Functions",    launch:"",              paper:"" },
+      { n:"7", title:"Trigonometric Functions",                launch:"",              paper:"" },
+      { n:"8", title:"Sequences & Series",                     launch:"",              paper:"" },
+      { n:"9", title:"Statistics & Inference",                 launch:"",              paper:"" }
+    ]
+  };
+  </script>
+  <!-- ============================================================= -->
+
+  <!-- passcode gate -->
+  <div id="gate">
+    <div class="kicker">Teacher Console</div>
+    <div class="lockttl">Enter the code</div>
+    <p class="locksub">Keeps students from wandering in. Not a security wall.</p>
+    <input id="code" type="password" placeholder="Teacher code" autocomplete="off" autofocus>
+    <button id="enter">Open console</button>
+    <div id="err"></div>
+  </div>
+
+  <!-- console body -->
+  <div id="console">
+    <header>
+      <div class="kicker">Teacher Console · Algebra 2</div>
+      <h1>Back office</h1>
+      <p class="intro">Your launch points in one place — build assessments, assign performance tasks, and reach the gradebook. Everything opens in a new tab.</p>
+    </header>
+
+    <div class="seclabel">Build</div>
+    <div id="build"></div>
+
+    <div class="seclabel">Assign · performance tasks</div>
+    <div id="assign"></div>
+
+    <div class="seclabel">Track</div>
+    <div id="track"></div>
+    <div class="note"><b>The real lock is Google, not this page.</b> Your gradebook Sheet is private to your account, so its link is safe to keep here even though this page is public. The code above is only a speed bump — don't rely on it to protect anything.</div>
+
+    <footer>Bookmark this page. It isn't linked from the student schedule, so students never see it.</footer>
+  </div>
+
+<script>
+  const $=id=>document.getElementById(id);
+  const esc=s=>(s||"").replace(/[<>]/g,"");
+
+  function unlock(){ $("gate").style.display="none"; $("console").style.display="block"; render(); }
+  $("enter").onclick=()=>{
+    if($("code").value===CONSOLE.passcode){ unlock(); }
+    else { $("err").textContent="That code didn't match."; $("code").select(); }
+  };
+  $("code").addEventListener("keydown",e=>{ if(e.key==="Enter") $("enter").click(); });
+
+  function linkBtn(url,label){ return url ? `<a class="go" href="${url}" target="_blank" rel="noopener">${label} ↗</a>` : ""; }
+
+  function render(){
+    // Build
+    const d=CONSOLE.designerUrl, dset=d && !d.includes("YOUR-");
+    $("build").innerHTML = `<a class="row${dset?"":" muted"}" ${dset?`href="${d}" target="_blank" rel="noopener"`:""}>
+      <div class="ic">✎</div>
+      <div class="body"><div class="t">CAT &amp; PT Designer</div>
+        <div class="s">Generate checks &amp; performance tasks — independent of the unit PTs</div></div>
+      <div class="links">${dset?'<span class="go">Open ↗</span>':'<span class="none">set URL in config</span>'}</div></a>`;
+
+    // Assign
+    $("assign").innerHTML = CONSOLE.units.map(u=>{
+      const any=u.launch||u.paper;
+      const links = any
+        ? linkBtn(u.launch,"Launch") + linkBtn(u.paper,"Paper copy") + (!u.launch&&!u.paper?"":"")
+        : '<span class="none">not built yet</span>';
+      return `<div class="row${any?"":" muted"}">
+        <div class="ic">${u.n}</div>
+        <div class="body"><div class="t">Unit ${u.n} PT</div><div class="s">${esc(u.title)}</div></div>
+        <div class="links">${links}</div></div>`;
+    }).join("");
+
+    // Track
+    const g=CONSOLE.gradebook;
+    const trackRow=(url,title,sub,label)=> url
+      ? `<a class="row" href="${url}" target="_blank" rel="noopener"><div class="ic">▦</div>
+          <div class="body"><div class="t">${title}</div><div class="s">${sub}</div></div>
+          <div class="links"><span class="go">Open ↗</span></div></a>`
+      : `<div class="row muted"><div class="ic">▦</div>
+          <div class="body"><div class="t">${title}</div><div class="s">${sub}</div></div>
+          <div class="links"><span class="none">add link in config</span></div></div>`;
+    $("track").innerHTML =
+      trackRow(g.sheetUrl,"Gradebook","Student IDs &amp; scores — private to your Google account") +
+      trackRow(g.formUrl,"Response Form","Where check scores land");
+  }
+</script>
+
+</div></div></body></html>
