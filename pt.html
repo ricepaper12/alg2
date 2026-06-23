@@ -1,0 +1,132 @@
+<!--
+  Algebra 2 — Unit 4 Performance Task (student-facing, digital copy)
+  ─────────────────────────────────────────────────────────────────
+  Rational functions: average-cost model. Shows the task + cost graphic.
+  The "Work with the Coach" button opens the Coach with this task pre-loaded
+  (passed in the link), so students never copy-paste.
+
+  SET UP:
+   • COACH_URL below is your Coach (same one Unit 1 uses).
+   • Students show all work on a PAPER copy — that's what you grade. This page is
+     for reading the task and getting help from the Coach.
+   • It's summative: link it from the hub only during the assessment window.
+
+  Location in your alg2 site: unit4/pt.html
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Newsreader:ital,opsz@0,6..72&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<script>
+  /* ============================== SET THESE ============================== */
+  const COACH_URL = "https://pt-coach.netlify.app/";   // ← your Coach URL
+
+  const PT = {
+    title: "The Sticker Startup",
+    fixed:    { amount: "$300", label: "one-time startup cost — the sticker-cutting machine" },
+    variable: { amount: "$2",   label: "in materials for every sticker you make" },
+    scenario:
+"You and a friend start a small business making custom stickers to sell at school events.\n\nBefore you make a single sticker, you spend $300 on a sticker-cutting machine. That is a one-time cost.\n\nAfter that, every sticker you make costs $2 in materials.\n\nYou want to understand your average cost per sticker — what each sticker really costs you once the machine is paid off across everything you make — and how that average changes as you make more.",
+    parts: [
+      "Write a function for the TOTAL cost C(x) of making x stickers. Your function should include both the one-time machine cost and the per-sticker materials cost.",
+      "Write a function for the AVERAGE cost per sticker, A(x) = C(x)/x. Then rewrite it in the form (a number) + (a number)/x. This is a rational function.",
+      "Find the average cost per sticker when you make 10 stickers, 100 stickers, and 300 stickers. Show each calculation. What pattern do you notice as the number of stickers grows?",
+      "The average-cost function has a horizontal asymptote. Find it. Then explain, in words and in terms of this business, what that number means — why can the average cost get closer and closer to it but never drop below it?",
+      "You want the average cost per sticker to be $5 or less so you can price the stickers fairly and still make money. How many stickers must you make? Set up and solve a rational equation, then explain your answer as an inequality (how many is 'enough').",
+      "Make a recommendation to your business partner. Using your math, explain why making more stickers lowers the average cost, and whether it makes sense to keep increasing production forever. Use the horizontal asymptote in your reasoning.",
+      "Extension: Suppose a better machine costs $600 instead of $300 (materials are still $2 each). Write the new average-cost function. What happens to the horizontal asymptote, and how many stickers would you now need to reach a $5 average? Compare to your earlier answer."
+    ]
+  };
+  /* ====================================================================== */
+</script>
+
+<style>
+  :root{--paper:#f6f3ec;--paper-2:#fffdf9;--ink:#23262b;--ink-soft:#5e6470;--line:#e3ddd0;--line-2:#d4ccbb;
+    --blue:#2f6f8f;--blue-deep:#22536b;--blue-soft:#e2eef2;--gold:#a9711a;--gold-soft:#f6ecd8;}
+  *{box-sizing:border-box} body{margin:0}
+  .wrap{font-family:"Newsreader",Georgia,serif;color:var(--ink);line-height:1.65;
+    background:radial-gradient(900px 460px at 90% -12%,#e6eff3 0,transparent 60%),var(--paper);min-height:100vh;
+    padding:30px clamp(14px,4vw,40px) 60px}
+  .shell{max-width:680px;margin:0 auto}
+  .kicker{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin:0 0 7px;font-weight:600}
+  h1{font-family:"Fraunces",serif;font-weight:900;font-size:clamp(28px,5vw,42px);line-height:1.04;margin:0 0 16px}
+
+  .scene{display:flex;gap:13px;align-items:stretch;margin-bottom:20px;flex-wrap:wrap}
+  .fixed,.variable{flex:1;min-width:230px;background:var(--paper-2);border:1px solid var(--line);border-radius:13px;padding:16px 18px}
+  .fixed{border-top:4px solid var(--blue)} .variable{border-top:4px solid var(--gold)}
+  .cname{font-family:"Fraunces",serif;font-weight:900;font-size:18px;margin-bottom:14px}
+  .fixed .cname{color:var(--blue-deep)} .variable .cname{color:var(--gold)}
+  .fact{display:flex;align-items:center;gap:11px}
+  .fixed .ic{color:var(--blue)} .variable .ic{color:var(--gold)}
+  .fact .big{font-size:24px;font-weight:600;line-height:1.1}
+  .fact .lab{font-size:13.5px;color:var(--ink-soft)}
+  .vs{display:flex;align-items:center;justify-content:center;font-family:"Fraunces",serif;font-size:26px;color:var(--ink-soft);font-weight:900}
+
+  .note{background:var(--gold-soft);border:1px solid #e3d2a6;border-radius:11px;padding:13px 16px;font-size:15px;margin-bottom:22px}
+  .note b{color:var(--gold)}
+  .sec{font-family:"Fraunces",serif;font-weight:900;font-size:20px;color:var(--blue-deep);margin:26px 0 10px}
+  .scenario{font-size:17px;white-space:pre-wrap}
+  ol{padding-left:22px;margin:0}
+  ol li{font-size:16.5px;margin-bottom:14px;padding-left:4px}
+  ol li::marker{font-family:"Fraunces",serif;font-weight:900;color:var(--blue)}
+
+  a.coach{display:flex;align-items:center;justify-content:space-between;gap:14px;text-decoration:none;color:#fff;
+    background:var(--blue);border-radius:14px;padding:18px 22px;margin-top:28px;box-shadow:0 16px 32px -22px var(--blue-deep)}
+  a.coach:hover{filter:brightness(1.07)}
+  a.coach .ct{font-family:"Fraunces",serif;font-weight:900;font-size:20px}
+  a.coach .cs{font-size:14px;opacity:.92;margin-top:2px}
+  a.coach .go{font-family:"JetBrains Mono",monospace;font-size:13px;border:1px solid rgba(255,255,255,.5);border-radius:9px;padding:9px 14px;white-space:nowrap}
+</style>
+
+<div class="wrap"><div class="shell">
+  <p class="kicker">Algebra 2 · Unit 4 · Performance Task</p>
+  <h1 id="title"></h1>
+
+  <div class="scene">
+    <div class="fixed">
+      <div class="cname">Startup cost</div>
+      <div class="fact">
+        <span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="7" width="16" height="12" rx="1.5"/><path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7M4 12h16"/></svg></span>
+        <span><span class="big" id="fAmt"></span><span class="lab" id="fLab"></span></span>
+      </div>
+    </div>
+    <div class="vs">+</div>
+    <div class="variable">
+      <div class="cname">Cost per sticker</div>
+      <div class="fact">
+        <span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v9M9.7 9.7c0-1.1 1-1.7 2.3-1.7s2.3.7 2.3 1.7-1 1.5-2.3 1.5-2.3.6-2.3 1.6 1 1.7 2.3 1.7 2.3-.6 2.3-1.7" stroke-width="1.3"/></svg></span>
+        <span><span class="big" id="vAmt"></span><span class="lab" id="vLab"></span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">📝 <b>Show all your work on your paper copy</b> — that's what gets graded. Read the task here, and use the Coach below if you get stuck. The Coach helps you think; it won't hand you the answer.</div>
+
+  <div class="sec">The situation</div>
+  <p class="scenario" id="scenario"></p>
+
+  <div class="sec">Your task</div>
+  <ol id="parts"></ol>
+
+  <a class="coach" id="coachBtn">
+    <div><div class="ct">Work with the Coach</div><div class="cs">It already has this task — just tell it where you're stuck.</div></div>
+    <span class="go">Open →</span>
+  </a>
+</div></div>
+
+<script>
+  const $=id=>document.getElementById(id);
+  const esc=s=>(s||"").toString().replace(/[<>]/g,"");
+  $("title").textContent=PT.title;
+  $("fAmt").textContent=PT.fixed.amount;   $("fLab").textContent=" "+PT.fixed.label;
+  $("vAmt").textContent=PT.variable.amount; $("vLab").textContent=" "+PT.variable.label;
+  $("scenario").textContent=PT.scenario;
+  $("parts").innerHTML=PT.parts.map(p=>`<li>${esc(p)}</li>`).join("");
+
+  // Build the full task string and hand it to the Coach via the link (no paste).
+  const coachTask = PT.title + "\n\n" + PT.scenario + "\n\nThe task:\n" +
+    PT.parts.map((p,i)=>`${i+1}. ${p}`).join("\n\n");
+  $("coachBtn").href = COACH_URL.replace(/\/$/,"") + "#task=" + encodeURIComponent(coachTask);
+</script>

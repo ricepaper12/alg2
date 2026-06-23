@@ -73,8 +73,9 @@
   <!-- ========================= SET THESE ========================= -->
   <script>
   const CONSOLE = {
-    passcode: "teacher",                                   // ← change this. Speed bump only, NOT security.
+    passcode: "alg2-teacher",                                   // ← change this. Speed bump only, NOT security.
     designerUrl: "https://pt-designer.netlify.app/",   // ← your CAT & PT Designer URL
+    coachUrl:    "https://pt-coach.netlify.app/",       // ← your PT Coach URL (student help, opens with the task pre-loaded)
     gradebook: {
       sheetUrl: "",   // ← your gradebook Google Sheet (private to your Google account = the real lock)
       formUrl:  ""    // ← the response Form (reference)
@@ -83,7 +84,7 @@
       { n:"1", title:"Functions, Equations & Transformations", launch:"unit1/pt.html", paper:"" },
       { n:"2", title:"Quadratic Functions & Complex Numbers",  launch:"",              paper:"" },
       { n:"3", title:"Polynomial Functions",                   launch:"",              paper:"" },
-      { n:"4", title:"Rational Expressions & Functions",       launch:"",              paper:"" },
+      { n:"4", title:"Rational Expressions & Functions",       launch:"unit4/pt.html", paper:"" },
       { n:"5", title:"Radical Functions & Rational Exponents", launch:"",              paper:"" },
       { n:"6", title:"Exponential & Logarithmic Functions",    launch:"",              paper:"" },
       { n:"7", title:"Trigonometric Functions",                launch:"",              paper:"" },
@@ -140,12 +141,16 @@
 
   function render(){
     // Build
-    const d=CONSOLE.designerUrl, dset=d && !d.includes("YOUR-");
-    $("build").innerHTML = `<a class="row${dset?"":" muted"}" ${dset?`href="${d}" target="_blank" rel="noopener"`:""}>
-      <div class="ic">✎</div>
-      <div class="body"><div class="t">CAT &amp; PT Designer</div>
-        <div class="s">Generate checks &amp; performance tasks — independent of the unit PTs</div></div>
-      <div class="links">${dset?'<span class="go">Open ↗</span>':'<span class="none">set URL in config</span>'}</div></a>`;
+    const buildRow=(url,ic,title,sub)=>{
+      const ok = url && !url.includes("YOUR-");
+      return `<a class="row${ok?"":" muted"}" ${ok?`href="${url}" target="_blank" rel="noopener"`:""}>
+        <div class="ic">${ic}</div>
+        <div class="body"><div class="t">${title}</div><div class="s">${sub}</div></div>
+        <div class="links">${ok?'<span class="go">Open ↗</span>':'<span class="none">set URL in config</span>'}</div></a>`;
+    };
+    $("build").innerHTML =
+      buildRow(CONSOLE.designerUrl,"✎","CAT &amp; PT Designer","Generate checks &amp; performance tasks — independent of the unit PTs") +
+      buildRow(CONSOLE.coachUrl,"◈","PT Coach","Student-facing tutor — opens with a task pre-loaded; nudges thinking, won't give answers");
 
     // Assign
     $("assign").innerHTML = CONSOLE.units.map(u=>{
