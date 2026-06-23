@@ -1,0 +1,114 @@
+<!--
+  Algebra 2 — Unit 3 Performance Task (student-facing, digital copy)
+  Location in your alg2 site: unit3/pt.html
+  The "Work with the Coach" button opens the Coach with this task pre-loaded.
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Newsreader:ital,opsz@0,6..72&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<script>
+  /* ============================== SET THESE ============================== */
+  const COACH_URL = "https://pt-coach.netlify.app/";   // ← your Coach URL
+  const PT = {
+    title: "The Open-Top Box",
+    cardA: { title:"The sheet", amount:"8 in × 10 in", label:"the flat piece of cardboard you start with" },
+    cardB: { title:"The cut",   amount:"x in", label:"a square cut from each corner, then fold the sides up" },
+    op: "→",
+    scenario:
+"A packaging company makes open-top boxes from flat sheets of cardboard that are 8 inches by 10 inches.\n\nTo build a box, they cut a square of side x inches from each of the four corners and fold the four sides up. The bigger the cut, the taller and narrower the box — so the volume depends on x.\n\nYour job is to model the volume as a polynomial and find the cut that holds the most.",
+    parts: [
+      "After cutting an x-inch square from each corner and folding up, write expressions for the box's height, length, and width in terms of x.",
+      "Write a function V(x) for the volume of the box, then expand it into standard polynomial form.",
+      "What is a reasonable domain for x in this situation? Explain why x cannot be 0, and why it must be less than 4.",
+      "Factor V(x) completely and find all of its zeros. Explain what each zero means about the box, including any zero that falls outside your domain.",
+      "Make a table of V(x) for x = 0.5, 1, 1.5, 2, 2.5, 3, and 3.5. Use the table to estimate the cut size x that gives the largest volume, and state that maximum volume.",
+      "Describe the end behavior of V(x) as a polynomial (ignoring the box). Then explain why only the piece of the graph between two of the zeros actually describes a real box.",
+      "Recommendation: The company needs each box to hold at least 48 cubic inches. Based on your table, what range of cut sizes x will work? Justify your answer.",
+      "Extension: Suppose the sheet were 8 inches by 8 inches (a square) instead. Write the new volume function V(x) and describe how the domain changes."
+    ]
+  };
+  /* ====================================================================== */
+</script>
+
+<style>
+  :root{--paper:#f6f3ec;--paper-2:#fffdf9;--ink:#23262b;--ink-soft:#5e6470;--line:#e3ddd0;--line-2:#d4ccbb;
+    --blue:#2f6f8f;--blue-deep:#22536b;--blue-soft:#e2eef2;--gold:#a9711a;--gold-soft:#f6ecd8;}
+  *{box-sizing:border-box} body{margin:0}
+  .wrap{font-family:"Newsreader",Georgia,serif;color:var(--ink);line-height:1.65;
+    background:radial-gradient(900px 460px at 90% -12%,#e6eff3 0,transparent 60%),var(--paper);min-height:100vh;
+    padding:30px clamp(14px,4vw,40px) 60px}
+  .shell{max-width:680px;margin:0 auto}
+  .kicker{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin:0 0 7px;font-weight:600}
+  h1{font-family:"Fraunces",serif;font-weight:900;font-size:clamp(28px,5vw,42px);line-height:1.04;margin:0 0 16px}
+  .scene{display:flex;gap:13px;align-items:stretch;margin-bottom:20px;flex-wrap:wrap}
+  .cardA,.cardB{flex:1;min-width:230px;background:var(--paper-2);border:1px solid var(--line);border-radius:13px;padding:16px 18px}
+  .cardA{border-top:4px solid var(--blue)} .cardB{border-top:4px solid var(--gold)}
+  .cname{font-family:"Fraunces",serif;font-weight:900;font-size:18px;margin-bottom:14px}
+  .cardA .cname{color:var(--blue-deep)} .cardB .cname{color:var(--gold)}
+  .fact{display:flex;align-items:center;gap:11px}
+  .cardA .ic{color:var(--blue)} .cardB .ic{color:var(--gold)}
+  .fact .big{font-size:24px;font-weight:600;line-height:1.1}
+  .fact .lab{font-size:13.5px;color:var(--ink-soft)}
+  .vs{display:flex;align-items:center;justify-content:center;font-family:"Fraunces",serif;font-size:26px;color:var(--ink-soft);font-weight:900}
+  .note{background:var(--gold-soft);border:1px solid #e3d2a6;border-radius:11px;padding:13px 16px;font-size:15px;margin-bottom:22px}
+  .note b{color:var(--gold)}
+  .sec{font-family:"Fraunces",serif;font-weight:900;font-size:20px;color:var(--blue-deep);margin:26px 0 10px}
+  .scenario{font-size:17px;white-space:pre-wrap}
+  ol{padding-left:22px;margin:0}
+  ol li{font-size:16.5px;margin-bottom:14px;padding-left:4px}
+  ol li::marker{font-family:"Fraunces",serif;font-weight:900;color:var(--blue)}
+  a.coach{display:flex;align-items:center;justify-content:space-between;gap:14px;text-decoration:none;color:#fff;
+    background:var(--blue);border-radius:14px;padding:18px 22px;margin-top:28px;box-shadow:0 16px 32px -22px var(--blue-deep)}
+  a.coach:hover{filter:brightness(1.07)}
+  a.coach .ct{font-family:"Fraunces",serif;font-weight:900;font-size:20px}
+  a.coach .cs{font-size:14px;opacity:.92;margin-top:2px}
+  a.coach .go{font-family:"JetBrains Mono",monospace;font-size:13px;border:1px solid rgba(255,255,255,.5);border-radius:9px;padding:9px 14px;white-space:nowrap}
+</style>
+
+<div class="wrap"><div class="shell">
+  <p class="kicker">Algebra 2 · Unit 3 · Performance Task</p>
+  <h1 id="title"></h1>
+
+  <div class="scene">
+    <div class="cardA">
+      <div class="cname" id="aTitle"></div>
+      <div class="fact"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="5" width="16" height="14" rx="1"/></svg></span>
+        <span><span class="big" id="aAmt"></span><span class="lab" id="aLab"></span></span></div>
+    </div>
+    <div class="vs" id="op"></div>
+    <div class="cardB">
+      <div class="cname" id="bTitle"></div>
+      <div class="fact"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 4l12 12M14 4h4v4M4 14v4h4" stroke-width="1.5"/></svg></span>
+        <span><span class="big" id="bAmt"></span><span class="lab" id="bLab"></span></span></div>
+    </div>
+  </div>
+
+  <div class="note">📝 <b>Show all your work on your paper copy</b> — that's what gets graded. Read the task here, and use the Coach below if you get stuck. The Coach helps you think; it won't hand you the answer.</div>
+
+  <div class="sec">The situation</div>
+  <p class="scenario" id="scenario"></p>
+  <div class="sec">Your task</div>
+  <ol id="parts"></ol>
+
+  <a class="coach" id="coachBtn">
+    <div><div class="ct">Work with the Coach</div><div class="cs">It already has this task — just tell it where you're stuck.</div></div>
+    <span class="go">Open →</span>
+  </a>
+</div></div>
+
+<script>
+  const $=id=>document.getElementById(id);
+  const esc=s=>(s||"").toString().replace(/[<>]/g,"");
+  $("title").textContent=PT.title;
+  $("aTitle").textContent=PT.cardA.title; $("aAmt").textContent=PT.cardA.amount; $("aLab").textContent=" "+PT.cardA.label;
+  $("bTitle").textContent=PT.cardB.title; $("bAmt").textContent=PT.cardB.amount; $("bLab").textContent=" "+PT.cardB.label;
+  $("op").textContent=PT.op;
+  $("scenario").textContent=PT.scenario;
+  $("parts").innerHTML=PT.parts.map(p=>`<li>${esc(p)}</li>`).join("");
+  const coachTask = PT.title + "\n\n" + PT.scenario + "\n\nThe task:\n" +
+    PT.parts.map((p,i)=>`${i+1}. ${p}`).join("\n\n");
+  $("coachBtn").href = COACH_URL.replace(/\/$/,"") + "#task=" + encodeURIComponent(coachTask);
+</script>
